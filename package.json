@@ -1,0 +1,25 @@
+{
+  "name": "sort-files",
+  "version": "1.0.0",
+  "description": "Sort files into corresponding folders",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nahsorad/sort-files.js.git"
+  },
+  "keywords": [
+    "sort",
+    "files",
+    "node"
+  ],
+  "author": "Roshan Adhikari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nahsorad/sort-files.js/issues"
+  },
+  "homepage": "https://github.com/nahsorad/sort-files.js#readme"
+}
