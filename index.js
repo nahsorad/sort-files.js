@@ -20,7 +20,7 @@ console.log("Path for desktop is",desktop)
 var files = []
 
 //Read the path and invoke the callback function
-fs.readdir(desktop,(err,files)=>{
+fs.readdir(desktop,(err,files) => {
     if(err) throw err;
 
     //Counter variables to count the number of files
@@ -29,83 +29,67 @@ fs.readdir(desktop,(err,files)=>{
 
     //Initialise empty filename
     var fileName = ""
+    var file = ""
+    var baseName = ""
+    var extName = ""
+    var fileNameArr = []
+    var extArr = []
+    var extension
+    var dirName
+    var dirPath
+    var oldPath
+    var newPath
 
     //Loop through the scanned files
     for(i = 0; i < files.length; i++){
-        var file = desktop +"\\"+files[i]
+        file = desktop +"\\"+files[i]
 
         //Distinguish the basename and extension from the full path of the scanned file
-        var baseName = path.basename(file)
-        var extName = path.extname(baseName) 
+        baseName = path.basename(file)
+        extName = path.extname(baseName) 
         
         //Split the strings into arrays
-        var fileNameArr = baseName.split('.')
-        var extArr = extName.split('.')
+        fileNameArr = baseName.split('.')
+        extArr = extName.split('.')
 
         /*
 
-        For files with multiple dots '.' in their name, loop through the array contents
-        to concatenate individual names into the full name.
+        For files with ultiple dots '.' in their name, split the basename with the extension name
 
         For example, a file demo.js.js.js.txt might be present where .txt is the actual
         extension and 'demo.js.js.js' is the filename exclusing the extension
 
         */
 
-        // if(fileNameArr.length>1){
-        //     for(i = 0; i < fileNameArr.length - 1; i++){
-        //         if(i==0)
-        //             fileName = fileNameArr[i]
-        //         else
-        //             fileName = fileName + "." + fileNameArr[i]
-        //     }
-        // }
+        if(fileNameArr.length > 1){
+            fileName = baseName.split(extName).join('')
+        }
 
-        console.log("Just the file name",fileName)
+        // console.log("Just the file name",fileName)
         
-        var extension = extArr[extArr.length - 1]
+        extension = extArr[extArr.length - 1]
 
         //Excluding shortcut files (.lnk) and executables (.exe) for the actual sorting
         if(extension!="lnk" && extension!="exe" && extension!=""){
-            var dirName = extension.toUpperCase()+" Files"
-            fs.mkdir(desktop+"\\"+dirName,(err) => {
+            dirName = extension.toUpperCase()+" Files"
+            dirPath = desktop+"\\"+dirName
+            fs.mkdir(dirPath,(err) => {
                 if(err) throw err
             })
-        }
 
-        console.log(baseName)
-       
-        switch(extName){
-            case '.c':
-                ccounter++
-                break;
-            case '.java':
-                javacounter++
-                break;
-            case '.js':
-                jscounter++
-                break;
-            case '.py':
-                pycounter++
-                break;
-            case '.cpp':
-                cppcounter++
-                break;
-            case '.cs':
-                cscounter++
-                break;
-            default:
-                break;
-        }
+            oldPath = file
+            newPath = dirPath+"\\"+baseName
+            // console.log(baseName)
+        
+            console.log("File path is: "+file)
+            console.log("Move to path: "+newPath)
+
+            fs.rename(oldPath, newPath, (err) => {
+                if(err) throw err
+                else
+                    console.log("File(s) moved successfully!")
+            })
     
+        }
     }
-    console.log(""+ccounter+" .c file(s) found.")
-    console.log(""+javacounter+" .java file(s) found.")
-    console.log(""+jscounter+" .js file(s) found.")
-    console.log(""+cppcounter+" .cpp file(s) found.")
-    console.log(""+pycounter+" .py file(s) found.")
-    console.log(""+cscounter+" .cs file(s) found.")
-
-})
-
-
+});
