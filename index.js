@@ -14,20 +14,16 @@ const path = require('path')
 //Set the path to search
 // var desktop = path.normalize("C:\\Users\\DELL\\Desktop")
 var desktop = path.normalize("E:\\SORTFILES_SANDBOX")
-console.log("Path for desktop is",desktop)
+console.log("Path for desktop is", desktop)
 
 //Array to store the (list of) file(s) to be scanned
 var files = []
 
 //Read the path and invoke the callback function
-fs.readdir(desktop,(err,files) => {
-    if(err) throw err;
+fs.readdir(desktop, (err, files) => {
+    if(err) throw err
 
-    //Counter variables to count the number of files
-    //for individual extensions
-    var ccounter = 0, javacounter = 0, cppcounter = 0, pycounter = 0, cscounter = 0, jscounter = 0;
-
-    //Initialise empty filename
+    //Variable declarations
     var fileName = ""
     var file = ""
     var baseName = ""
@@ -42,7 +38,7 @@ fs.readdir(desktop,(err,files) => {
 
     //Loop through the scanned files
     for(i = 0; i < files.length; i++){
-        file = desktop +"\\"+files[i]
+        file = desktop + "\\" + files[i]
 
         //Distinguish the basename and extension from the full path of the scanned file
         baseName = path.basename(file)
@@ -70,26 +66,25 @@ fs.readdir(desktop,(err,files) => {
         extension = extArr[extArr.length - 1]
 
         //Excluding shortcut files (.lnk) and executables (.exe) for the actual sorting
-        if(extension!="lnk" && extension!="exe" && extension!=""){
-            dirName = extension.toUpperCase()+" Files"
-            dirPath = desktop+"\\"+dirName
-            fs.mkdir(dirPath,(err) => {
+        if(extension != "lnk" && extension != "exe" && extension != ""){
+            dirName = extension.toUpperCase() + " Files"
+            dirPath = desktop + "\\" + dirName
+            fs.mkdir(dirPath, (err) => {
                 if(err) throw err
             })
 
             oldPath = file
-            newPath = dirPath+"\\"+baseName
+            newPath = dirPath + "\\" + baseName
             // console.log(baseName)
         
-            console.log("File path is: "+file)
-            console.log("Move to path: "+newPath)
+            console.log("File path is: " + file)
+            console.log("Move to path: " + newPath)
 
             fs.rename(oldPath, newPath, (err) => {
                 if(err) throw err
                 else
                     console.log("File(s) moved successfully!")
             })
-    
         }
     }
 });
