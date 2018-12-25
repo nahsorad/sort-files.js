@@ -1,2 +1,11 @@
-### sort-files.js
-:open_file_folder:Sort desktop files into corresponding folders using Node.js
+# sort-files
+
+A Node.js script that reads through a directory and sorts files into corresponding folders.
+
+## Running Locally
+
+Clone the repository
+```sh
+git clone https://github.com/nahsorad/sort-files.js
+cd sort-files.js
+```
