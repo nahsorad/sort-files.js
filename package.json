@@ -1,7 +1,7 @@
 {
   "name": "sort-files",
   "version": "1.0.0",
-  "description": "Sort files into corresponding folders",
+  "description": "Sort files into related folders",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -14,7 +14,7 @@
   "keywords": [
     "sort",
     "files",
-    "node"
+    "folders"
   ],
   "author": "Roshan Adhikari",
   "license": "ISC",
