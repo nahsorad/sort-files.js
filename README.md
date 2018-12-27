@@ -7,7 +7,7 @@ A Node.js script that reads through a directory and sorts files into correspondi
 ## Install
 
 ```
-$ npm install sort-files
+$ npm i sort-files
 ```
 
 ## Usage
