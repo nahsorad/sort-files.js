@@ -1,11 +1,17 @@
-# sort-files
+# sort-files 
 
 A Node.js script that reads through a directory and sorts files into corresponding folders.
 
-## Running Locally
+## Install
 
-Clone the repository
 ```sh
-git clone https://github.com/nahsorad/sort-files.js
-cd sort-files.js
+$ npm install sort-files
+```
+## Usage
+
+```js
+var sort = require('sort-files');
+
+sort.here("E:\\SORTFILES_SANDBOX\\");
+sort.move();
 ```
