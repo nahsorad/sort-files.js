@@ -27,7 +27,7 @@ var move = function(){
 
     //Read the path and invoke the callback function
     fs.readdir(directoryPath, (err, files) => {
-        if(err) console.log("Path",directoryPath,"could not be read: "+err.message)
+        if(err) console.log("Path", directoryPath, "could not be read: " + err.message)
 
         //Variable declarations
         var fileName = ""
@@ -77,7 +77,7 @@ var move = function(){
                 dirName = extension.toUpperCase() + " Files"
                 dirPath = directoryPath + "\\" + dirName
                 fs.mkdir(dirPath, (err) => {
-                    if(err) console.log("Directory",dirName,"could not be created: "+err.message)
+                    if(err) console.log("Directory", dirName, "could not be created: " + err.message)
                 })
 
                 oldPath = file
@@ -88,13 +88,13 @@ var move = function(){
 
                 fs.rename(oldPath, newPath, (err) => {
                     if(err) {
-                        console.log("File",baseName,"could not be moved: "+err.message)
+                        console.log("File", baseName, "could not be moved: " + err.message)
                         moveError = true
                     }
                 })
 
                 if(!moveError){
-                    console.log("File",baseName,"moved successfully!")
+                    console.log("File", baseName, "moved successfully!")
                 }
             }
         }
