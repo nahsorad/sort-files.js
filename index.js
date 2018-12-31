@@ -15,11 +15,10 @@ var directoryPath = ""
 
 //Set the path to be searched
 var here = function (searchPath){
-    directoryPath = searchPath
+    directoryPath = path.normalize(searchPath)
 }
 
 var move = function(){
-    directoryPath = path.normalize(directoryPath)
     console.log("Path to be searched is", directoryPath)
 
     //Array to store the (list of) file(s) to be scanned
@@ -45,7 +44,7 @@ var move = function(){
 
         //Loop through the scanned files
         for(i = 0; i < files.length; i++){
-            file = directoryPath + "\\" + files[i]
+            file = path.normalize(directoryPath + "\\" + files[i])
 
             //Distinguish the basename and extension from the full path of the scanned file
             baseName = path.basename(file)
@@ -56,32 +55,28 @@ var move = function(){
             extArr = extName.split('.')
 
             /*
-
             For files with ultiple dots '.' in their name, split the basename with the extension name
 
             For example, a file demo.js.js.js.txt might be present where .txt is the actual
             extension and 'demo.js.js.js' is the filename exclusing the extension
-
             */
 
             if(fileNameArr.length > 1){
                 fileName = baseName.split(extName).join('')
             }
 
-            // console.log("Just the file name",fileName)
-
             extension = extArr[extArr.length - 1]
 
-            //Excluding shortcut files (.lnk) and executables (.exe) for the actual sorting
+            //Excluding shortcut files (.lnk) and executables (.exe) {Windows only} for the actual sorting
             if(extension != "lnk" && extension != "exe" && extension != ""){
                 dirName = extension.toUpperCase() + " Files"
-                dirPath = directoryPath + "\\" + dirName
+                dirPath = path.normalize(directoryPath + "\\" + dirName)
                 fs.mkdir(dirPath, (err) => {
                     if(err) console.log("Directory", dirName, "could not be created: " + err.message)
                 })
 
                 oldPath = file
-                newPath = dirPath + "\\" + baseName
+                newPath = path.normalize(dirPath + "\\" + baseName)
             
                 console.log("File path is: " + file)
                 console.log("Move to path: " + newPath)
