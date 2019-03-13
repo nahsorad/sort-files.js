@@ -6,7 +6,7 @@ NPM package that reads through a directory and sorts files into corresponding fo
 
 ## Install
 
-```
+```sh
 $ npm i sort-files
 ```
 
